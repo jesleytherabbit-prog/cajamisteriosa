@@ -64,6 +64,9 @@ button.ghost{background:var(--sage);box-shadow:0 4px 0 #4C6343}
 .note b{color:var(--terra-d)}
 .code{margin-top:12px;padding:12px 14px;background:#FFFDF8;border:1px dashed rgba(196,160,90,.9);border-radius:4px;font-family:'Courier New',monospace;font-size:13px;line-height:1.6;color:var(--ink);white-space:pre-wrap;word-break:break-word}
 .actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:16px}
+.prev{margin-top:10px;padding:14px 10px;background:#fff;border:1px dashed rgba(196,160,90,.9);border-radius:6px}
+.more{margin-top:10px;font-family:'Cinzel',serif;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--soft);cursor:pointer}
+.more .code{text-transform:none;letter-spacing:0;cursor:text}
 .foot{margin-top:22px;text-align:center}
 .foot .l{margin-bottom:6px;font-family:'Pinyon Script',cursive;font-size:28px;color:var(--terra);line-height:1.1}
 .foot .s{font-family:'Cinzel',serif;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--soft)}
@@ -101,8 +104,12 @@ button.ghost{background:var(--sage);box-shadow:0 4px 0 #4C6343}
         <div class="stat ko"><b id="cKo"></b><span>Si se rebela</span></div>
       </div>
       <p class="note">Narra en tu post cómo tu PJ intenta domar su ingrediente y haz la tirada al final. Si la superas, sumas el bonificador a tu <b>Base</b> de la Ronda 1; si fallas, el penalizador.</p>
-      <div class="code" id="cCode"></div>
-      <div class="actions"><button type="button" id="copy">Copiar para el post</button><button type="button" class="ghost" id="again">Otra caja</button></div>
+      <h3 style="margin-top:20px">Para tu post</h3>
+      <p class="note" style="margin-top:0">Copia la tarjeta y pégala al final de tu post, junto a tu tirada. Así quedará en el foro:</p>
+      <div class="prev" id="cPrev"></div>
+      <div class="actions"><button type="button" id="copy">Copiar tarjeta</button><button type="button" class="ghost" id="copyB">Versión simple</button></div>
+      <details class="more"><summary>Ver el código</summary><div class="code" id="cCode"></div></details>
+      <div class="actions"><button type="button" class="ghost" id="again">Otra caja</button></div>
     </div>
   </section>
 
@@ -114,6 +121,12 @@ const ING=[{"n": 1, "nombre": "Huevo de Ashwinder", "desc": "Explota si se calie
 const $=id=>document.getElementById(id);
 function toast(t){ const el=$('toast'); el.textContent=t; el.classList.add('on'); clearTimeout(toast.h); toast.h=setTimeout(()=>el.classList.remove('on'),1800); }
 const sgn=n=>(n>0?'+':'')+n;
+function tarjeta(it){ // tarjeta para el foro: una sola línea y estilos en línea (el foro rompe los saltos)
+  const F="font-family:'Cinzel',Georgia,serif";
+  return `<div style="max-width:440px;margin:14px auto;padding:14px 16px 12px;background:#F5EDDD;border:1px solid #C4A05A;border-radius:8px;box-shadow:0 0 0 3px #FBF7EF,0 0 0 4px rgba(196,160,90,.5);color:#45372B;font-family:'Cormorant Garamond',Georgia,serif;font-size:15px;line-height:1.45;text-align:left;"><div style="text-align:center;${F};font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:#657F59;">Magic Chef · La Caja Misteriosa</div><div style="display:flex;gap:14px;align-items:center;margin-top:10px;"><img src="${it.img}" alt="" style="width:84px;height:84px;object-fit:contain;flex:0 0 84px;background:#FFFFFF;border:1px solid rgba(196,160,90,.6);border-radius:50%;padding:6px;"><div style="min-width:0;"><div style="${F};font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#B05E3E;">Caja nº ${it.n}</div><div style="${F};font-size:17px;font-weight:700;line-height:1.2;color:#8E4A30;">${it.nombre}</div><div style="font-style:italic;font-size:14.5px;color:#7E6C5C;">${it.desc}</div></div></div><div style="margin-top:10px;padding-top:8px;border-top:1px solid #C4A05A;"><div style="display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;"><span><b style="${F};font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#657F59;">Tirada</b> ${it.tirada}</span><span><b style="${F};font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#657F59;">Dificultad</b> <b>${it.dif}</b></span></div><div style="display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-top:2px;"><span><b style="${F};font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#657F59;">Si lo domo</b> <b style="color:#657F59;">${sgn(it.ok)} Base</b></span><span><b style="${F};font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#B05E3E;">Si se rebela</b> <b style="color:#B05E3E;">${sgn(it.ko)} Base</b></span></div></div></div>`;
+}
+function simple(it){ return `[center][img(90px,90px)]${it.img}[/img]\n[b]Caja Misteriosa nº ${it.n}: ${it.nombre}[/b]\n[i]${it.desc}[/i]\n[b]Tirada:[/b] ${it.tirada} contra ${it.dif}\n[color=#657F59][b]Si lo domo:[/b] ${sgn(it.ok)} Base[/color] · [color=#B05E3E][b]Si se rebela:[/b] ${sgn(it.ko)} Base[/color][/center]`; }
+function copiar(t,msg){ (navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(()=>toast(msg)).catch(()=>{ const ta=document.createElement('textarea'); ta.value=t; document.body.appendChild(ta); ta.select(); try{ document.execCommand('copy'); toast(msg); }catch(e){ toast('No pude copiar: ábrelo en «Ver el código»'); } ta.remove(); }); }
 $('ask').addEventListener('submit',e=>{
   e.preventDefault();
   const n=parseInt($('d50').value,10);
@@ -125,13 +138,13 @@ $('ask').addEventListener('submit',e=>{
   setTimeout(()=>{
     $('cNum').textContent='Caja nº '+it.n; $('cImg').src=it.img; $('cImg').alt=it.nombre; $('cName').textContent=it.nombre; $('cDesc').textContent=it.desc;
     $('cTir').textContent=it.tirada; $('cDif').textContent=it.dif; $('cOk').textContent=sgn(it.ok); $('cKo').textContent=sgn(it.ko);
-    $('cCode').textContent=`[img]${it.img}[/img]\n[b]Caja Misteriosa nº ${it.n}: ${it.nombre}[/b]\n[b]Tirada:[/b] ${it.tirada} contra ${it.dif}\n[b]Si lo domo:[/b] ${sgn(it.ok)} a mi Base · [b]Si se rebela:[/b] ${sgn(it.ko)} a mi Base`;
+    const card=tarjeta(it); $('cPrev').innerHTML=card; $('cCode').textContent=card; window._simple=simple(it);
     box.classList.remove('pop'); box.classList.add('dim');
     $('card').classList.add('on'); $('card').scrollIntoView({behavior:'smooth',block:'start'});
   },1150);
 });
-$('copy').addEventListener('click',()=>{ const t=$('cCode').textContent;
-  (navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(()=>toast('Copiado: pégalo al final de tu post')).catch(()=>{ const r=document.createRange(); r.selectNodeContents($('cCode')); const s=getSelection(); s.removeAllRanges(); s.addRange(r); toast('Selecciónalo y cópialo'); }); });
+$('copy').addEventListener('click',()=>copiar($('cCode').textContent,'Tarjeta copiada: pégala al final de tu post'));
+$('copyB').addEventListener('click',()=>copiar(window._simple||'','Versión simple copiada (BBCode)'));
 $('again').addEventListener('click',()=>{ $('card').classList.remove('on'); $('box').classList.remove('dim'); $('d50').value=''; $('d50').focus(); window.scrollTo({top:0,behavior:'smooth'}); });
 $('cImg').addEventListener('error',()=>{ $('cImg').style.visibility='hidden'; });
 $('cImg').addEventListener('load',()=>{ $('cImg').style.visibility=''; });
