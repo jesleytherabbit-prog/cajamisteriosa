@@ -2,122 +2,137 @@
 <html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>La Caja Misteriosa · Magic Chef</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;600;700&family=VT323&family=Cormorant+Garamond:ital,wght@0,500;0,700;1,500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Pinyon+Script&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#1F2A22;--bg2:#2A3A2E;--cream:#FBF3E2;--paper:#F4E7CC;--ink:#3A2A1E;--terra:#B4442F;--terra-d:#7E2A1C;--gold:#E3B356;--gold-d:#A8782A;--green:#3E6B48;--soft:#8A7461}
+:root{--wood:#E7D5B8;--wood-d:#D9C19C;--ivory:#FBF7EF;--paper:#F5EDDD;--ink:#45372B;--soft:#7E6C5C;--terra:#B05E3E;--terra-d:#8E4A30;--sage:#657F59;--gold:#C4A05A;--gold-l:#E3C98E;--line:rgba(69,55,43,.14)}
 *{box-sizing:border-box}
 html,body{margin:0;min-height:100%;overflow-x:hidden}
-body{background:var(--bg);background-image:radial-gradient(circle at 50% 30%,#3B5141 0%,transparent 60%),repeating-linear-gradient(0deg,rgba(255,255,255,.025) 0 2px,transparent 2px 4px);color:var(--cream);font-family:'Cormorant Garamond',Georgia,serif;font-size:18px;display:flex;flex-direction:column;align-items:center;padding:28px 16px 40px}
-.sparks{position:fixed;inset:0;pointer-events:none;overflow:hidden}
-.sparks i{position:absolute;width:6px;height:6px;background:var(--gold);box-shadow:0 0 8px var(--gold);animation:tw 3s infinite ease-in-out;image-rendering:pixelated}
-@keyframes tw{0%,100%{opacity:.15;transform:scale(.6)}50%{opacity:1;transform:scale(1)}}
-header{text-align:center;max-width:620px}
-.kick{font-family:'VT323',monospace;font-size:20px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
-h1{margin:4px 0 0;font-family:'Pixelify Sans',monospace;font-weight:700;font-size:clamp(34px,7vw,56px);line-height:1;color:var(--cream);text-shadow:4px 4px 0 var(--terra-d),0 0 24px rgba(227,179,86,.35)}
-.stage{position:relative;width:min(320px,80vw);aspect-ratio:1;margin:18px auto 0}
-.box{width:100%;height:100%;object-fit:contain;image-rendering:pixelated;filter:drop-shadow(0 18px 18px rgba(0,0,0,.45));animation:float 3.2s ease-in-out infinite;transition:transform .3s}
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
-.box.shake{animation:shake .7s steps(2) 1}
-@keyframes shake{0%,100%{transform:translate(0,0) rotate(0)}20%{transform:translate(-8px,2px) rotate(-6deg)}40%{transform:translate(8px,-2px) rotate(6deg)}60%{transform:translate(-6px,0) rotate(-4deg)}80%{transform:translate(6px,0) rotate(4deg)}}
+body{background-color:var(--wood);background-image:repeating-linear-gradient(90deg,rgba(255,255,255,.16) 0 1px,transparent 1px 9px),repeating-linear-gradient(90deg,rgba(140,95,50,.09) 0 2px,transparent 2px 43px),linear-gradient(180deg,var(--wood),var(--wood-d));color:var(--ink);font-family:'Cormorant Garamond',Georgia,serif;font-size:18px;line-height:1.5;padding:26px 14px 40px}
+.page{position:relative;max-width:620px;margin:0 auto;background:var(--ivory);border-radius:6px;padding:30px 30px 26px;box-shadow:0 1px 0 rgba(255,255,255,.6) inset,0 18px 40px rgba(69,55,43,.22);outline:1px solid var(--gold);outline-offset:-10px}
+.spark{position:absolute;width:10px;height:10px;opacity:.75;pointer-events:none}
+.spark::before,.spark::after{content:'';position:absolute;left:50%;top:50%;background:var(--gold);transform:translate(-50%,-50%)}
+.spark::before{width:2px;height:100%}.spark::after{width:100%;height:2px}
+.s1{top:90px;left:30px}.s2{top:60px;right:40px;transform:scale(.7)}.s3{top:46%;left:18px;transform:scale(.6)}.s4{bottom:80px;right:24px}.s5{bottom:30px;left:44%;transform:scale(.6)}
+.mast{display:flex;justify-content:space-between;gap:10px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--sage)}
+.mast b{color:var(--terra);font-weight:600}
+.rule{height:1px;margin:8px 0 0;background:var(--gold)}
+.kick{margin-top:18px;text-align:center;font-family:'Cinzel',serif;font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:var(--sage)}
+h1{margin:4px 0 0;text-align:center;font-family:'Cinzel',serif;font-weight:700;font-size:clamp(30px,6vw,42px);letter-spacing:.04em;line-height:1.05;color:var(--ink)}
+h1 em{display:block;font-family:'Pinyon Script',cursive;font-style:normal;font-weight:400;font-size:.95em;letter-spacing:0;color:var(--terra)}
+.deck{margin:10px auto 0;max-width:460px;text-align:center;font-style:italic;font-size:18px;color:var(--soft)}
+.stage{position:relative;width:min(280px,72vw);aspect-ratio:1;margin:14px auto 0}
+.box{width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 14px 16px rgba(69,55,43,.3));animation:float 3.4s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.box.shake{animation:shake .7s ease-in-out 1}
+@keyframes shake{0%,100%{transform:rotate(0)}15%{transform:rotate(-7deg) translateX(-6px)}35%{transform:rotate(7deg) translateX(6px)}55%{transform:rotate(-5deg)}75%{transform:rotate(5deg)}}
 .box.pop{animation:pop .45s ease-in forwards}
-@keyframes pop{to{transform:scale(1.25) translateY(-20px);opacity:0}}
-.flash{position:absolute;inset:-20%;border-radius:50%;background:radial-gradient(circle,rgba(255,236,170,.95),rgba(227,179,86,.4) 40%,transparent 70%);opacity:0;pointer-events:none}
+@keyframes pop{to{transform:scale(1.2) translateY(-16px);opacity:0}}
+.box.dim{opacity:.4;animation:none}
+.flash{position:absolute;inset:-12%;border-radius:50%;background:radial-gradient(circle,rgba(255,247,222,.98),rgba(227,201,142,.55) 40%,transparent 70%);opacity:0;pointer-events:none}
 .flash.on{animation:flash .9s ease-out}
-@keyframes flash{0%{opacity:0;transform:scale(.4)}30%{opacity:1}100%{opacity:0;transform:scale(1.4)}}
-.ask{margin:10px auto 0;text-align:center;max-width:520px}
-.ask label{display:block;font-family:'VT323',monospace;font-size:24px;line-height:1.2;color:var(--cream)}
-.row{display:flex;justify-content:center;gap:10px;margin-top:12px;flex-wrap:wrap}
-input{width:120px;padding:10px 12px;border:4px solid var(--gold);background:var(--cream);color:var(--ink);font-family:'Pixelify Sans',monospace;font-size:30px;text-align:center;outline:none;box-shadow:4px 4px 0 var(--terra-d)}
-input:focus{border-color:#fff}
-button{padding:12px 20px;border:4px solid var(--ink);background:var(--terra);color:var(--cream);font-family:'Pixelify Sans',monospace;font-size:20px;font-weight:600;cursor:pointer;box-shadow:4px 4px 0 var(--ink);text-transform:uppercase;letter-spacing:.04em}
-button:hover{background:#C9533B}
-button:active{transform:translate(3px,3px);box-shadow:1px 1px 0 var(--ink)}
-button.ghost{background:var(--green)}
-.err{min-height:24px;margin-top:8px;font-family:'VT323',monospace;font-size:22px;color:#FFB4A2}
-.card{display:none;width:min(640px,100%);margin:6px auto 0;background:var(--paper);color:var(--ink);border:6px solid var(--ink);box-shadow:8px 8px 0 rgba(0,0,0,.45),inset 0 0 0 4px var(--gold);padding:22px 22px 20px;position:relative;animation:rise .5s ease-out}
+@keyframes flash{0%{opacity:0;transform:scale(.4)}30%{opacity:1}100%{opacity:0;transform:scale(1.3)}}
+.ask{margin:6px auto 0;text-align:center;max-width:460px}
+.ask label{display:block;font-family:'Cinzel',serif;font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);line-height:1.5}
+.row{display:flex;justify-content:center;align-items:stretch;gap:10px;margin-top:12px;flex-wrap:wrap}
+input{width:110px;padding:6px 10px;border:1px solid var(--gold);border-radius:6px;background:#fff;box-shadow:0 0 0 3px var(--ivory),0 0 0 4px rgba(196,160,90,.45);color:var(--ink);font-family:Georgia,'Times New Roman',serif;font-size:32px;font-weight:700;text-align:center;font-variant-numeric:lining-nums tabular-nums;outline:none}
+input:focus{border-color:var(--terra)}
+input::-webkit-outer-spin-button,input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+input[type=number]{-moz-appearance:textfield}
+button{padding:12px 22px;border:0;border-radius:99px;background:var(--terra);color:var(--ivory);font-family:'Cinzel',serif;font-size:12.5px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;cursor:pointer;box-shadow:0 4px 0 var(--terra-d)}
+button:hover{background:#BF6A48}
+button:active{transform:translateY(2px);box-shadow:0 2px 0 var(--terra-d)}
+button.ghost{background:var(--sage);box-shadow:0 4px 0 #4C6343}
+.err{min-height:24px;margin-top:8px;font-style:italic;color:var(--terra-d)}
+.card{display:none;margin-top:16px;padding:24px 22px 20px;background:var(--paper);border:1px solid var(--gold);border-radius:6px;position:relative;animation:rise .5s ease-out}
 .card.on{display:block}
-@keyframes rise{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
-.num{position:absolute;top:-22px;left:50%;transform:translateX(-50%);padding:4px 14px;background:var(--terra);color:var(--cream);border:4px solid var(--ink);font-family:'Pixelify Sans',monospace;font-weight:700;font-size:18px;white-space:nowrap}
-.ing{display:grid;grid-template-columns:150px minmax(0,1fr);gap:18px;align-items:center;margin-top:8px}
-.ing img{width:150px;height:150px;object-fit:contain;image-rendering:pixelated;background:radial-gradient(circle,#fff7e3,transparent 70%)}
-.ing h2{margin:0;font-family:'Pixelify Sans',monospace;font-weight:700;font-size:clamp(26px,5vw,34px);line-height:1.05;color:var(--terra-d)}
-.desc{margin:8px 0 0;font-style:italic;font-size:19px;line-height:1.4}
-.how{margin-top:18px;border-top:4px dashed rgba(58,42,30,.35);padding-top:14px}
-.how h3{margin:0 0 8px;font-family:'VT323',monospace;font-size:22px;letter-spacing:.12em;text-transform:uppercase;color:var(--green)}
+@keyframes rise{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+.tag{position:absolute;top:-11px;left:50%;transform:translateX(-50%);padding:4px 14px 3px;border-radius:99px;background:var(--sage);color:var(--ivory);font-family:'Cinzel',serif;font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;white-space:nowrap}
+.ing{display:grid;grid-template-columns:140px minmax(0,1fr);gap:18px;align-items:center}
+.ing img{width:140px;height:140px;object-fit:contain;background:radial-gradient(circle,#fff,rgba(255,255,255,0) 70%);border-radius:50%}
+.ing h2{margin:0;font-family:'Cinzel',serif;font-weight:700;font-size:clamp(22px,4.6vw,28px);line-height:1.15;color:var(--terra-d)}
+.ing .n{display:block;font-family:'Pinyon Script',cursive;font-weight:400;font-size:26px;color:var(--terra);line-height:1}
+.desc{margin:6px 0 0;font-style:italic;font-size:19px;line-height:1.4;color:var(--ink)}
+.how{margin-top:18px;padding-top:14px;border-top:1px solid var(--gold)}
+.how h3{margin:0 0 10px;text-align:center;font-family:'Cinzel',serif;font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--sage)}
 .stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
-.stat{background:var(--cream);border:3px solid var(--ink);padding:10px 8px;text-align:center}
-.stat b{display:block;font-family:'Pixelify Sans',monospace;font-size:22px;line-height:1.1;color:var(--ink)}
-.stat span{display:block;margin-top:4px;font-family:'VT323',monospace;font-size:18px;letter-spacing:.06em;text-transform:uppercase;color:var(--soft)}
-.stat.ok b{color:var(--green)} .stat.ko b{color:var(--terra)}
-.stat.wide{grid-column:1/-1}
-.note{margin:14px 0 0;font-size:16.5px;line-height:1.45}
-.code{margin-top:12px;background:#fff;border:3px dashed var(--ink);padding:10px 12px;font-family:'VT323',monospace;font-size:19px;line-height:1.3;white-space:pre-wrap;word-break:break-word}
-.actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:14px}
-.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);opacity:0;padding:8px 16px;background:var(--ink);color:var(--cream);border:3px solid var(--gold);font-family:'VT323',monospace;font-size:20px;transition:.25s}
+.stat{background:var(--ivory);border:1px solid rgba(196,160,90,.7);border-radius:6px;padding:10px 8px;text-align:center}
+.stat b{display:block;font-family:Georgia,'Times New Roman',serif;font-weight:700;font-size:24px;line-height:1.1;color:var(--ink);font-variant-numeric:lining-nums}
+.stat span{display:block;margin-top:4px;font-family:'Cinzel',serif;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--soft)}
+.stat.wide{grid-column:1/-1}.stat.wide b{font-family:'Cormorant Garamond',Georgia,serif;font-size:24px}
+.stat.ok b{color:var(--sage)}.stat.ko b{color:var(--terra)}
+.note{margin:14px 0 0;font-size:17px;line-height:1.45}
+.note b{color:var(--terra-d)}
+.code{margin-top:12px;padding:12px 14px;background:#FFFDF8;border:1px dashed rgba(196,160,90,.9);border-radius:4px;font-family:'Courier New',monospace;font-size:13px;line-height:1.6;color:var(--ink);white-space:pre-wrap;word-break:break-word}
+.actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:16px}
+.foot{margin-top:22px;text-align:center}
+.foot .l{margin-bottom:6px;font-family:'Pinyon Script',cursive;font-size:28px;color:var(--terra);line-height:1.1}
+.foot .s{font-family:'Cinzel',serif;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--soft)}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);opacity:0;padding:8px 18px;border-radius:99px;background:var(--ink);color:var(--ivory);font-family:'Cinzel',serif;font-size:12px;letter-spacing:.12em;transition:.25s;pointer-events:none}
 .toast.on{opacity:1;transform:translateX(-50%)}
-footer{margin-top:28px;font-family:'VT323',monospace;font-size:18px;color:rgba(251,243,226,.6);text-align:center}
-@media (max-width:540px){.ing{grid-template-columns:1fr;text-align:center}.ing img{margin:0 auto}.stats{gap:6px}.stat{padding:8px 4px}.stat b{font-size:18px}.stat span{font-size:15px}.card{padding:22px 14px 16px}}
-@media (prefers-reduced-motion:reduce){.box,.sparks i{animation:none}}
+@media (max-width:540px){.page{padding:24px 16px 20px}.ing{grid-template-columns:1fr;text-align:center}.ing img{margin:0 auto}.card{padding:22px 14px 16px}.stats{gap:6px}.stat{padding:8px 4px}.stat b{font-size:20px}.stat span{font-size:8.5px;letter-spacing:.1em}}
+@media (prefers-reduced-motion:reduce){.box{animation:none}}
 </style></head>
 <body>
-<div class="sparks" aria-hidden="true" id="sparks"></div>
-<header><div class="kick">Magic Chef · Ronda 1</div><h1>La Caja Misteriosa</h1></header>
+<main class="page">
+  <span class="spark s1"></span><span class="spark s2"></span><span class="spark s3"></span><span class="spark s4"></span><span class="spark s5"></span>
+  <div class="mast"><b>Sabores del Mundo Mágico</b><span>Magic Chef · Ronda 1</span></div>
+  <div class="rule"></div>
+  <div class="kick">Prueba de apertura</div>
+  <h1>La Caja <em>Misteriosa</em></h1>
+  <p class="deck">Cada concursante recibe una caja cerrada con un ingrediente mágico. Lo que haya dentro decidirá cómo empieza su plato.</p>
 
-<div class="stage"><div class="flash" id="flash"></div><img class="box" id="box" src="https://i.imgur.com/0Kjmrit.png" alt="La Caja Misteriosa"></div>
+  <div class="stage"><div class="flash" id="flash"></div><img class="box" id="box" src="https://i.imgur.com/0Kjmrit.png" alt="La Caja Misteriosa"></div>
 
-<form class="ask" id="ask" autocomplete="off">
-  <label for="d50">Introduce el número de tirada que has obtenido en tu d50:</label>
-  <div class="row"><input id="d50" type="number" min="1" max="50" inputmode="numeric" placeholder="?" required><button type="submit">Abrir la caja</button></div>
-  <div class="err" id="err" role="alert"></div>
-</form>
+  <form class="ask" id="ask" autocomplete="off">
+    <label for="d50">Introduce el número de tirada que has obtenido en tu d50</label>
+    <div class="row"><input id="d50" type="number" min="1" max="50" inputmode="numeric" placeholder="?" required><button type="submit">Abrir la caja</button></div>
+    <div class="err" id="err" role="alert"></div>
+  </form>
 
-<section class="card" id="card" aria-live="polite">
-  <div class="num" id="cNum">Caja nº 1</div>
-  <div class="ing"><img id="cImg" alt=""><div><h2 id="cName"></h2><p class="desc" id="cDesc"></p></div></div>
-  <div class="how">
-    <h3>Para domarlo</h3>
-    <div class="stats">
-      <div class="stat wide"><b id="cTir"></b><span>Tu tirada</span></div>
-      <div class="stat"><b id="cDif"></b><span>Dificultad</span></div>
-      <div class="stat ok"><b id="cOk"></b><span>Si lo domas</span></div>
-      <div class="stat ko"><b id="cKo"></b><span>Si se rebela</span></div>
+  <section class="card" id="card" aria-live="polite">
+    <span class="tag" id="cNum">Caja nº 1</span>
+    <div class="ing"><img id="cImg" alt=""><div><span class="n">Tu ingrediente</span><h2 id="cName"></h2><p class="desc" id="cDesc"></p></div></div>
+    <div class="how">
+      <h3>Para domarlo</h3>
+      <div class="stats">
+        <div class="stat wide"><b id="cTir"></b><span>Tu tirada</span></div>
+        <div class="stat"><b id="cDif"></b><span>Dificultad</span></div>
+        <div class="stat ok"><b id="cOk"></b><span>Si lo domas</span></div>
+        <div class="stat ko"><b id="cKo"></b><span>Si se rebela</span></div>
+      </div>
+      <p class="note">Narra en tu post cómo tu PJ intenta domar su ingrediente y haz la tirada al final. Si la superas, sumas el bonificador a tu <b>Base</b> de la Ronda 1; si fallas, el penalizador.</p>
+      <div class="code" id="cCode"></div>
+      <div class="actions"><button type="button" id="copy">Copiar para el post</button><button type="button" class="ghost" id="again">Otra caja</button></div>
     </div>
-    <p class="note">Narra en tu post cómo tu PJ intenta domar su ingrediente y haz la tirada al final. Si la superas, sumas el bonificador a tu <b>Base</b> de la Ronda 1; si fallas, el penalizador.</p>
-    <div class="code" id="cCode"></div>
-    <div class="actions"><button type="button" id="copy">Copiar para el post</button><button type="button" class="ghost" id="again">Otra caja</button></div>
-  </div>
-</section>
+  </section>
 
-<footer>Sabores del Mundo Mágico · Magic Chef · Quinta edición</footer>
+  <div class="foot"><div class="l">Que los fogones te sean propicios</div><div class="s">Magic Chef · Quinta edición</div></div>
+</main>
 <div class="toast" id="toast"></div>
-
 <script>
 const ING=[{"n": 1, "nombre": "Huevo de Ashwinder", "desc": "Explota si se calienta de golpe; hay que templarlo poco a poco.", "tirada": "Voluntad + Arte/Artesanía (Cocina)", "dif": 12, "ok": 2, "ko": -2, "img": "https://i.imgur.com/QAickcS.png"}, {"n": 2, "nombre": "Nabo malhumorado", "desc": "Muerde los dedos si se lo pela sin guantes.", "tirada": "Destreza + Esquiva", "dif": 9, "ok": 1, "ko": -1, "img": "https://i.imgur.com/0Enccxh.png"}, {"n": 3, "nombre": "Pimienta lunar", "desc": "Solo suelta su sabor si se muele bajo luz tenue.", "tirada": "Percepción + Consciencia", "dif": 9, "ok": 1, "ko": -1, "img": "https://i.imgur.com/n81TV1O.png"}, {"n": 4, "nombre": "Bayas saltarinas", "desc": "Rebotan fuera del bol si se mezclan con fuerza.", "tirada": "Destreza + Latrocinio", "dif": 9, "ok": 1, "ko": -1, "img": "https://i.imgur.com/Ht0j4bF.png"}, {"n": 5, "nombre": "Miel de abeja de fuego", "desc": "Se cristaliza con el frío y quema la lengua si se usa cruda.", "tirada": "Inteligencia + Magizoología", "dif": 12, "ok": 2, "ko": -2, "img": "https://i.imgur.com/u3pJnMy.png"}, {"n": 6, "nombre": "Leche de unicornio", "desc": "Se corta si el cocinero está estresado o enfadado.", "tirada": "Voluntad + Frialdad", "dif": 12, "ok": 2, "ko": -2, "img": "https://i.imgur.com/qedjYyo.png"}, {"n": 7, "nombre": "Setas sollozantes", "desc": "Lloran y se amargan si se cortan con cuchillo de metal.", "tirada": "Inteligencia + Herbología", "dif": 9, "ok": 1, "ko": -1, "img": "https://i.imgur.com/svNefcg.png"}, {"n": 8, "nombre": "Menta glacial", "desc": "Congela lo que toca; pierde todo su sabor con el calor.", "tirada": "Inteligencia + Herbología", "dif": 12, "ok": 2, "ko": -2, "img": "https://i.imgur.com/Gb3J0c9.png"}, {"n": 9, "nombre": "Huevas de grindylow", "desc": "Se vuelven gomosas si tocan agua dulce.", "tirada": "Inteligencia + Magizoología", "dif": 9, "ok": 1, "ko": -1, "img": "https://i.imgur.com/9NTqGNe.png"}, {"n": 10, "nombre": "Tomates tímidos", "desc": "Se vuelven invisibles si alguien los mira fijamente.", "tirada": "Destreza + Sigilo", "dif": 12, "ok": 2, "ko": -1, "img": "https://i.imgur.com/LGQoRI4.png"}, {"n": 11, "nombre": "Sal de lágrima de sirena", "desc": "Sala el doble de lo esperado; usar con moderación.", "tirada": "Voluntad + Arte/Artesanía (Cocina)", "dif": 9, "ok": 1, "ko": -2, "img": "https://i.imgur.com/8X3Wivv.png"}, {"n": 12, "nombre": "Calabaza cantarina", "desc": "Si se cocina mientras tararea queda dulce; si calla, amarga.", "tirada": "Carisma + Oratoria", "dif": 12, "ok": 2, "ko": -2, "img": "https://i.imgur.com/w0vHOS5.png"}, {"n": 13, "nombre": "Harina de ala de hada", "desc": "Hace flotar las masas; hay que ponerles peso encima.", "tirada": "Inteligencia + Arcanismo", "dif": 12, "ok": 2, "ko": -1, "img": "https://i.imgur.com/c6kwOJc.png"}, {"n": 14, "nombre": "Chocolate anímico", "desc": "Cambia de sabor según el estado de ánimo de quien lo trabaja.", "tirada": "Voluntad + Frialdad", "dif": 15, "ok": 3, "ko": -2, "img": "https://i.imgur.com/L7x3Rp0.png"}, {"n": 15, "nombre": "Queso dormilón", "desc": "Provoca sueño si se derrite demasiado.", "tirada": "Percepción + Alerta", "dif": 12, "ok": 2, "ko": -2, "img": "https://i.imgur.com/LMWjcU0.png"}, {"n": 16, "nombre": "Pétalos de rosa de dragón", "desc": "Sueltan chispas al freírlos.", "tirada": "Destreza + Esquiva", "dif": 12, "ok": 2, "ko": -1, "img": "https://i.imgur.com/0B0xuoz.png"}, {"n": 17, "nombre": "Cebolla del olvido", "desc": "Si te hace llorar, olvidas el último paso de la receta.", "tirada": "Voluntad + Frialdad", "dif": 12, "ok": 2, "ko": -2, "img": "https://i.imgur.com/mGkvMZt.png"}, {"n": 18, "nombre": "Fresas de nube", "desc": "Se evaporan si no se usan en diez minutos.", "tirada": "Percepción + Iniciativa", "dif": 12, "ok": 2, "ko": -2, "img": "https://i.imgur.com/o95YjiN.png"}, {"n": 19, "nombre": "Ajo reforzado", "desc": "Su olor no se va con ningún hechizo de limpieza.", "tirada": "Poder + Pociones", "dif": 9, "ok": 1, "ko": -1, "img": "https://i.imgur.com/CoobTZ2.png"}, {"n": 20, "nombre": "Trufa del bosque oscuro", "desc": "Solo libera su aroma si se ralla en silencio absoluto.", "tirada": "Destreza + Sigilo", "dif": 12, "ok": 2, "ko": -1, "img": "https://i.imgur.com/rdZu2on.png"}, {"n": 21, "nombre": "Huevo de Occamy", "desc": "Su cáscara es de plata pura; muy difícil de romper.", "tirada": "Vigor + Atletismo", "dif": 12, "ok": 2, "ko": -1, "img": "https://i.imgur.com/XY0BGjK.png"}, {"n": 22, "nombre": "Lima chispeante", "desc": "Burbujea como gaseosa al exprimirla y salpica.", "tirada": "Destreza + Esquiva", "dif": 9, "ok": 1, "ko": -1, "img": "https://i.imgur.com/FCAQS7P.png"}, {"n": 23, "nombre": "Arroz saltamontes", "desc": "Salta de la olla al hervir; exige tapa encantada.", "tirada": "Inteligencia + Arcanismo", "dif": 9, "ok": 1, "ko": -1, "img": "https://i.imgur.com/3AFiMzV.png"}, {"n": 24, "nombre": "Pez globo luminoso", "desc": "Se infla si lo asustan; brilla solo si está fresco.", "tirada": "Inteligencia + Magizoología", "dif": 15, "ok": 3, "ko": -2, "img": "https://i.imgur.com/IEwdpUq.png"}, {"n": 25, "nombre": "Algas de marea", "desc": "Se hinchan y se encogen siguiendo la luna; en marea baja quedan duras como cuero.", "tirada": "Inteligencia + Adivinación", "dif": 12, "ok": 2, "ko": -2, "img": "https://i.imgur.com/m99kwwh.png"}, {"n": 26, "nombre": "Canela de fénix", "desc": "Estalla en llamas si se tuesta de más.", "tirada": "Percepción + Alerta", "dif": 12, "ok": 2, "ko": -2, "img": "https://i.imgur.com/9mX79QI.png"}, {"n": 27, "nombre": "Mantequilla obediente", "desc": "Solo se derrite si se le pide amablemente.", "tirada": "Carisma + Oratoria", "dif": 9, "ok": 1, "ko": -1, "img": "https://i.imgur.com/dw1XH2m.png"}, {"n": 28, "nombre": "Azúcar risueña", "desc": "En exceso provoca ataques de risa incontrolables.", "tirada": "Poder + Pociones", "dif": 12, "ok": 2, "ko": -2, "img": "https://i.imgur.com/e5TBrFP.png"}, {"n": 29, "nombre": "Vainas de Snargaluff", "desc": "Se resisten; hay que forcejear para abrirlas.", "tirada": "Vigor + Pelea", "dif": 12, "ok": 2, "ko": -1, "img": "https://i.imgur.com/VcshKfi.png"}, {"n": 30, "nombre": "Agua de manantial encantado", "desc": "Hierve a temperatura ambiente.", "tirada": "Inteligencia + Arcanismo", "dif": 9, "ok": 1, "ko": -1, "img": "https://i.imgur.com/QqjliD1.png"}, {"n": 31, "nombre": "Jengibre parlanchín", "desc": "Da consejos de cocina, no siempre buenos.", "tirada": "Percepción + Empatía", "dif": 12, "ok": 2, "ko": -2, "img": "https://i.imgur.com/c1rm9yD.png"}, {"n": 32, "nombre": "Pera nerviosa", "desc": "Tiembla y se magulla con nada; muy susceptible al estrés.", "tirada": "Carisma + Seducción", "dif": 12, "ok": 2, "ko": -1, "img": "https://i.imgur.com/ofaL1q8.png"}, {"n": 33, "nombre": "Hongo de sombra", "desc": "Pierde el sabor bajo luz directa.", "tirada": "Inteligencia + Herbología", "dif": 9, "ok": 1, "ko": -1, "img": "https://i.imgur.com/dl0XSWJ.png"}, {"n": 34, "nombre": "Plátano invertido", "desc": "Se pela de adentro hacia afuera.", "tirada": "Destreza + Latrocinio", "dif": 12, "ok": 2, "ko": -1, "img": "https://i.imgur.com/KH6EYBP.png"}, {"n": 35, "nombre": "Castañas bumerán", "desc": "Vuelven a quien las lanza; se tuestan solas si se agitan.", "tirada": "Vigor + Atletismo", "dif": 9, "ok": 1, "ko": -1, "img": "https://i.imgur.com/mX4sK3a.png"}, {"n": 36, "nombre": "Pimiento de dragón galés", "desc": "Tan picante que hace salir humo por las orejas.", "tirada": "Voluntad + Frialdad", "dif": 15, "ok": 3, "ko": -2, "img": "https://i.imgur.com/mdhr1RC.png"}, {"n": 37, "nombre": "Manzana espejo", "desc": "Sabe distinto según quién la mire.", "tirada": "Percepción + Empatía", "dif": 15, "ok": 3, "ko": -2, "img": "https://i.imgur.com/Jbsod5g.png"}, {"n": 38, "nombre": "Cerezas gravitatorias", "desc": "Pesan diez veces más de lo que aparentan.", "tirada": "Vigor + Atletismo", "dif": 12, "ok": 2, "ko": -1, "img": "https://i.imgur.com/DgsHxIo.png"}, {"n": 39, "nombre": "Coco susurrante", "desc": "Susurra al abrirlo; si se rompe de golpe, se agria.", "tirada": "Percepción + Consciencia", "dif": 12, "ok": 2, "ko": -2, "img": "https://i.imgur.com/VgcaPOp.png"}, {"n": 40, "nombre": "Yogur de cabra montesa", "desc": "Fermenta en segundos y se pasa rapidísimo.", "tirada": "Percepción + Iniciativa", "dif": 12, "ok": 2, "ko": -2, "img": "https://i.imgur.com/9ByPsns.png"}, {"n": 41, "nombre": "Polvo de estrella fugaz", "desc": "Da brillo a los platos, pero se dispersa con cualquier corriente de aire.", "tirada": "Destreza + Sigilo", "dif": 12, "ok": 2, "ko": -1, "img": "https://i.imgur.com/KDblCB6.png"}, {"n": 42, "nombre": "Espárragos danzarines", "desc": "Se mueven al ritmo de la música; quietos solo en silencio.", "tirada": "Voluntad + Arte/Artesanía (Música)", "dif": 9, "ok": 1, "ko": -1, "img": "https://i.imgur.com/qMWWGLt.png"}, {"n": 43, "nombre": "Berenjena gruñona", "desc": "Se amarga si la tratan con brusquedad.", "tirada": "Voluntad + Arte/Artesanía (Cocina)", "dif": 9, "ok": 1, "ko": -2, "img": "https://i.imgur.com/9gf8T3a.png"}, {"n": 44, "nombre": "Huevos de augurey", "desc": "Saben mejor cuando llueve; reaccionan al clima.", "tirada": "Inteligencia + Adivinación", "dif": 12, "ok": 2, "ko": -1, "img": "https://i.imgur.com/BgqPalj.png"}, {"n": 45, "nombre": "Café del desvelo", "desc": "Un sorbo quita el sueño por horas; con calor se vuelve más potente.", "tirada": "Poder + Pociones", "dif": 12, "ok": 2, "ko": -2, "img": "https://i.imgur.com/zNp4D5v.png"}, {"n": 46, "nombre": "Gelatina de murtlap", "desc": "Calma quemaduras, pero se derrite al mínimo calor.", "tirada": "Inteligencia + Magizoología", "dif": 12, "ok": 2, "ko": -2, "img": "https://i.imgur.com/xukmF7F.png"}, {"n": 47, "nombre": "Ruibarbo rebelde", "desc": "Crece sin control si se lo deja solo en la mesa.", "tirada": "Percepción + Alerta", "dif": 9, "ok": 1, "ko": -1, "img": "https://i.imgur.com/yO6lAS9.png"}, {"n": 48, "nombre": "Limón de bruma", "desc": "Suelta niebla al cortarlo y reduce la visibilidad.", "tirada": "Percepción + Consciencia", "dif": 12, "ok": 2, "ko": -2, "img": "https://i.imgur.com/cPU9ncx.png"}, {"n": 49, "nombre": "Avena del tiempo", "desc": "Se cocina al instante o tarda horas, según la paciencia del cocinero.", "tirada": "Voluntad + Frialdad", "dif": 9, "ok": 1, "ko": -1, "img": "https://i.imgur.com/9Dq1Hlc.png"}, {"n": 50, "nombre": "Caramelo cambiante", "desc": "Duro en frío, líquido en tibio; cambia de color con la temperatura.", "tirada": "Voluntad + Arte/Artesanía (Cocina)", "dif": 15, "ok": 3, "ko": -2, "img": "https://i.imgur.com/7hqYn60.png"}];
 const $=id=>document.getElementById(id);
-const sp=$('sparks'); for(let i=0;i<26;i++){ const s=document.createElement('i'); s.style.left=Math.random()*100+'%'; s.style.top=Math.random()*100+'%'; s.style.animationDelay=(Math.random()*3)+'s'; sp.appendChild(s); }
 function toast(t){ const el=$('toast'); el.textContent=t; el.classList.add('on'); clearTimeout(toast.h); toast.h=setTimeout(()=>el.classList.remove('on'),1800); }
-function sgn(n){ return (n>0?'+':'')+n; }
-let cur=null;
+const sgn=n=>(n>0?'+':'')+n;
 $('ask').addEventListener('submit',e=>{
   e.preventDefault();
   const n=parseInt($('d50').value,10);
   if(!(n>=1&&n<=50)){ $('err').textContent='El número tiene que estar entre 1 y 50.'; return; }
   $('err').textContent='';
-  const it=ING[n-1]; cur=it;
-  const box=$('box'); $('card').classList.remove('on');
-  box.classList.remove('pop','shake'); void box.offsetWidth; box.classList.add('shake');
+  const it=ING[n-1]; const box=$('box'); $('card').classList.remove('on');
+  box.classList.remove('pop','shake','dim'); void box.offsetWidth; box.classList.add('shake');
   setTimeout(()=>{ box.classList.remove('shake'); box.classList.add('pop'); const f=$('flash'); f.classList.remove('on'); void f.offsetWidth; f.classList.add('on'); },700);
   setTimeout(()=>{
     $('cNum').textContent='Caja nº '+it.n; $('cImg').src=it.img; $('cImg').alt=it.nombre; $('cName').textContent=it.nombre; $('cDesc').textContent=it.desc;
-    $('cTir').textContent=it.tirada; $('cDif').textContent=it.dif; $('cOk').textContent=sgn(it.ok)+' Base'; $('cKo').textContent=sgn(it.ko)+' Base';
+    $('cTir').textContent=it.tirada; $('cDif').textContent=it.dif; $('cOk').textContent=sgn(it.ok); $('cKo').textContent=sgn(it.ko);
     $('cCode').textContent=`[img]${it.img}[/img]\n[b]Caja Misteriosa nº ${it.n}: ${it.nombre}[/b]\n[b]Tirada:[/b] ${it.tirada} contra ${it.dif}\n[b]Si lo domo:[/b] ${sgn(it.ok)} a mi Base · [b]Si se rebela:[/b] ${sgn(it.ko)} a mi Base`;
+    box.classList.remove('pop'); box.classList.add('dim');
     $('card').classList.add('on'); $('card').scrollIntoView({behavior:'smooth',block:'start'});
-    box.classList.remove('pop'); box.style.opacity='.35';
   },1150);
 });
 $('copy').addEventListener('click',()=>{ const t=$('cCode').textContent;
   (navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(()=>toast('Copiado: pégalo al final de tu post')).catch(()=>{ const r=document.createRange(); r.selectNodeContents($('cCode')); const s=getSelection(); s.removeAllRanges(); s.addRange(r); toast('Selecciónalo y cópialo'); }); });
-$('again').addEventListener('click',()=>{ $('card').classList.remove('on'); $('box').style.opacity=''; $('d50').value=''; $('d50').focus(); window.scrollTo({top:0,behavior:'smooth'}); });
+$('again').addEventListener('click',()=>{ $('card').classList.remove('on'); $('box').classList.remove('dim'); $('d50').value=''; $('d50').focus(); window.scrollTo({top:0,behavior:'smooth'}); });
 $('cImg').addEventListener('error',()=>{ $('cImg').style.visibility='hidden'; });
 $('cImg').addEventListener('load',()=>{ $('cImg').style.visibility=''; });
 </script>
